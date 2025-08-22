@@ -1,0 +1,19 @@
+# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Carpetas de compilación
+bin/
+obj/
+Debug/
+Release/
+
+# Archivos temporales
+*.log
+*.cache
+*.tmp
+
+# Configuración local
+*.db
+*.sqlite
