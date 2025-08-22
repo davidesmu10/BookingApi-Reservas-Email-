@@ -1,68 +1,53 @@
-# 📅 BookingApi – API de Reservas (Hoteles / Clínicas / Restaurantes)
+# 🛒 EcomApi
 
-**BookingApi** es una API REST construida en **ASP.NET Core 8** que permite gestionar **ubicaciones**, *slots* de disponibilidad y **reservas** con autenticación JWT y notificaciones por email (SMTP o SendGrid).  
-Ideal como base para sistemas de reservas de **hoteles, clínicas médicas o restaurantes**.
-
-Actualmente funciona en **memoria (InMemory)** para desarrollo y pruebas locales, pero está preparada para conectarse fácilmente a **SQL Server** con Entity Framework Core.
+**EcomApi** es una API RESTful desarrollada en **.NET 9** que permite gestionar información relacionada con un sistema de e-commerce.  
+El proyecto está diseñado para funcionar tanto en **memoria interna** (ideal para pruebas rápidas) como con conexión a una **base de datos** (para entornos productivos).
 
 ---
 
-## ✨ Características principales
-- 🔐 **Autenticación JWT**: registro y login de usuarios.
-- 🏨 **Gestión de ubicaciones** (CRUD para administradores).
-- 📅 **Gestión de disponibilidad** (*slots*) para reservas.
-- 📌 **Reservas por usuario**: crear, consultar, cancelar.
-- 📧 **Notificaciones por correo** al crear o cancelar una reserva.
-- 🛠️ Estructura modular y lista para producción.
+## 🚀 Características principales
+- API REST desarrollada en **ASP.NET Core 9**.
+- Arquitectura **modular y escalable**.
+- Funciona en **modo en memoria** (sin necesidad de BD) o conectado a **SQL Server**.
+- Endpoints para consultar y gestionar información de productos, órdenes y clientes.
+- Documentación con **Swagger/OpenAPI**.
 
 ---
 
-## 📂 Estructura del proyecto
-BookingApi/
-├── Program.cs
-├── AppDbContext.cs
-├── Models/
-│ ├── User.cs
-│ ├── Location.cs
-│ ├── Slot.cs
-│ └── Booking.cs
-├── DTOs/
-│ ├── AuthDtos.cs
-│ └── BookingDtos.cs
-├── Services/
-│ ├── JwtService.cs
-│ └── EmailService.cs
-├── Controllers/
-│ ├── AuthController.cs
-│ ├── LocationsController.cs
-│ ├── SlotsController.cs
-│ └── BookingsController.cs
-├── appsettings.json
-└── BookingApi.csproj
+## 📂 Estructura del Proyecto
+EcomApi/
+│── Controllers/ # Controladores con los endpoints
+│── Models/ # Modelos de datos
+│── Services/ # Servicios de negocio (en memoria o BD)
+│── Program.cs # Configuración principal
+│── appsettings.json # Configuración de la aplicación
 
 
----
+Endpoints principales
+Productos
 
-## 🧭 Endpoints principales
+GET /api/products → Lista todos los productos
 
-### 🔐 Autenticación
-- `POST /api/auth/register` → Crear usuario.
-- `POST /api/auth/login` → Autenticación y obtención de JWT.
+GET /api/products/{id} → Obtiene un producto por ID
 
-### 🏨 Ubicaciones
-- `GET /api/locations` → Listar ubicaciones.
-- `GET /api/locations/{id}` → Obtener ubicación por ID.
-- `POST /api/locations` → Crear ubicación (Admin).
-- `PUT /api/locations/{id}` → Editar ubicación (Admin).
-- `DELETE /api/locations/{id}` → Eliminar ubicación (Admin).
+POST /api/products → Crea un nuevo producto
 
-### 📅 Slots (Disponibilidad)
-- `GET /api/locations/{locationId}/slots?from=&to=` → Listar *slots* disponibles.
-- `POST /api/locations/{locationId}/slots` → Crear slot (Admin).
+PUT /api/products/{id} → Actualiza un producto
 
-### 📌 Reservas
-- `GET /api/bookings` → Ver mis reservas.
-- `GET /api/bookings/{id}` → Ver detalles de una reserva.
-- `POST /api/bookings` → Crear nueva reserva.
-- `POST /api/bookings/{id}/cancel` → Cancelar reserva (con email de confirmación).
+DELETE /api/products/{id} → Elimina un producto
 
+Órdenes
+
+GET /api/orders → Lista todas las órdenes
+
+GET /api/orders/{id} → Obtiene una orden por ID
+
+POST /api/orders → Crea una nueva orden
+
+Clientes
+
+GET /api/customers → Lista todos los clientes
+
+GET /api/customers/{id} → Obtiene un cliente por ID
+
+POST /api/customers → Crea un nuevo cliente
